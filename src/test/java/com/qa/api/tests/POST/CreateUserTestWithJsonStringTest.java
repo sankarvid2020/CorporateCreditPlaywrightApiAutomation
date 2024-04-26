@@ -37,13 +37,6 @@ public class CreateUserTestWithJsonStringTest {
         playwright.close();
     }
 
-
-    public static String getRandomEmail(){
-        emailId = "testpwautomation"+ System.currentTimeMillis() + "@gmail.com";
-        return emailId;
-    }
-
-
     @Test
     public void createUserTest() throws IOException {
 

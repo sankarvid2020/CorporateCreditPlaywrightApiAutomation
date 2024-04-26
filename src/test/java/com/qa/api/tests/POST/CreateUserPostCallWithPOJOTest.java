@@ -37,7 +37,7 @@ public class CreateUserPostCallWithPOJOTest {
 
 
     public static String getRandomEmail(){
-        emailId = "testpwautomation"+ System.currentTimeMillis() + "@gmail.com";
+        emailId = "apiautomation"+ System.currentTimeMillis() + "@gmail.com";
         return emailId;
     }
 

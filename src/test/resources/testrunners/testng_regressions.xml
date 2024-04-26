@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="User details Test API Regression Suite" thread-count="5"
+	parallel="tests" verbose="4">
+
+	<listeners>
+		<listener
+			class-name="listeners.ExtentReportListener" />
+
+	</listeners>
+	<test name="Get user details">
+		<classes>
+			<class name="com.qa.api.tests.GET.GETAPICall" />
+		</classes>
+	</test>
+
+</suite>
