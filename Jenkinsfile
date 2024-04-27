@@ -10,11 +10,9 @@ pipeline
     {
         stage('Build') 
         {
-            steps
               steps{
                         echo("deploy to dev")
                     }
-
         }
 
         stage("Deploy to QA"){
@@ -43,6 +41,6 @@ pipeline
                                   reportName: 'HTML Extent Report', 
                                   reportTitles: ''])
             }
-        }           
+        }
     }
 }
