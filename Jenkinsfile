@@ -11,22 +11,12 @@ pipeline
         stage('Build') 
         {
             steps
-            {
-                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
-                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
-            }
-            post 
-            {
-                success
-                {
-                    junit '**/target/surefire-reports/TEST-*.xml'
-                    archiveArtifacts 'target/*.jar'
-                }
-            }
+              steps{
+                        echo("deploy to dev")
+                    }
+
         }
-        
-        
-        
+
         stage("Deploy to QA"){
             steps{
                 echo("deploy to qa")
@@ -43,7 +33,6 @@ pipeline
             }
         }
         
-        
         stage('Publish Extent Report'){
             steps{
                      publishHTML([allowMissing: false,
@@ -54,10 +43,6 @@ pipeline
                                   reportName: 'HTML Extent Report', 
                                   reportTitles: ''])
             }
-        }
-        
-        
-        
-        
+        }           
     }
 }
