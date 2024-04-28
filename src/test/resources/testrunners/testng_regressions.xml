@@ -14,5 +14,50 @@
 			<class name="com.qa.api.tests.GET.GETAPICall" />
 		</classes>
 	</test>
+	<test name="Get response with header">
+		<classes>
+			<class name="com.qa.api.tests.GET.APIResponseHeadersTest" />
+		</classes>
+	</test>
+	<test name="Dispose get response">
+		<classes>
+			<class name="com.qa.api.tests.GET.APIDisposeTest" />
+		</classes>
+	</test>
+	<test name="Create user using POST API">
+		<classes>
+			<class name="com.qa.api.tests.POST.CreateUserPostCallTest" />
+		</classes>
+	</test>
+	<test name="Create user with Json string using POST API">
+		<classes>
+			<class name="com.qa.api.tests.POST.CreateUserTestWithJsonStringTest" />
+		</classes>
+	</test>
+	<test name="Create user with Json file using POST API">
+		<classes>
+			<class name="com.qa.api.tests.POST.CreateUserWithJsonFileTest" />
+		</classes>
+	</test>
+	<test name="Create user with POJO test using POST API">
+		<classes>
+			<class name="com.qa.api.tests.POST.CreateUserPostCallWithPOJOTest" />
+		</classes>
+	</test>
+	<test name="Create user with POJO Lombok using POST API">
+		<classes>
+			<class name="com.qa.api.tests.POST.CreateUserPotCallWithPojoLombokTest" />
+		</classes>
+	</test>
+	<test name="Update user details with POJO lombok">
+		<classes>
+			<class name="com.qa.api.tests.PUT.UpdateUserPUTCallWithPOJOLombokTest" />
+		</classes>
+	</test>
+	<test name="Delete user API test">
+		<classes>
+			<class name="com.qa.api.tests.DELETE.DeleteUserAPITest" />
+		</classes>
+	</test>
 
 </suite>
