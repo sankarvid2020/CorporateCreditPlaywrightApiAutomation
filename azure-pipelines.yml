@@ -1,22 +1,73 @@
-# Maven
-# Build your Java project and run tests with Apache Maven.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+# Azure pipelines documentation: https://aka.ms/yaml
 
-trigger:
-- main
+# Don't trigger pipeline on push to a branch.
+# Pipeline for branch can always be started manually.
+# For master branch scheduled run will be executed nightly.
+trigger: none
 
-pool:
-  vmImage: ubuntu-latest
+# Run all tests every night before the working day at 7:00 Dutch time.
+schedules:
+  - cron: "0 5 * * MON-FRI"
+    displayName: Nightly tests execution
+    branches:
+      include:
+        - master
+    always: true
 
-steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+pool: Rabo-Linux-Production
+
+variables:
+  MAVEN_CACHE_FOLDER: $(Pipeline.Workspace)/.m2/repository
+  MAVEN_OPTS: '-Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
+  ${{ if not(eq(variables['Build.SourceBranchName'], 'merge')) }}:
+    SOURCE_BRANCH: $(Build.SourceBranchName)
+    COMMIT_ID: $(Build.SourceVersion)
+  ${{ if eq(variables['Build.SourceBranchName'], 'merge') }}:
+    # Remove 'refs/heads/' from branch name and leave only branch name itself
+    SOURCE_BRANCH: $[replace(variables['System.PullRequest.SourceBranch'], 'refs/heads/', '')]
+    COMMIT_ID: $(System.PullRequest.SourceCommitId)
+
+stages:
+  - stage: execute_tests
+    displayName: Execute tests
+    jobs:
+      - job: functional_tests
+        displayName: 'Tests on TEST environment'
+        timeoutInMinutes: 120
+        steps:
+          - script: env
+          - task: Cache@2
+            displayName: Cache Maven dependencies
+            inputs:
+              key: '"$(SOURCE_BRANCH)" | $(COMMIT_ID)'
+              # In case of new commit restore from branch or master to partially decrease build time
+              restoreKeys: |
+                "$(SOURCE_BRANCH)"
+                "master"
+              path: $(MAVEN_CACHE_FOLDER)
+          - script: ./cert/installCert.sh "$(JAVA_HOME_11_X64)"
+            displayName: 'Install certificates'
+            failOnStderr: false
+          - task: Maven@3
+            inputs:
+              ${{ if not(eq(variables['Build.SourceBranchName'], 'merge')) }}:
+                goals: 'verify -P moon -Dmoon.session.name=BFOffer'
+              # Run only smoke tests for pull requests
+              ${{ if eq(variables['Build.SourceBranchName'], 'merge') }}:
+                goals: 'verify -P moon -Dmoon.session.name=BFOffer -Dtags=@smoke'
+              mavenOptions: '$(MAVEN_OPTS)'
+              jdkVersionOption: '1.11'
+              publishJUnitResults: true
+              testResultsFiles: 'target/cucumber-reports/*.xml'
+            displayName: 'Execute tests'
+            timeoutInMinutes: 90
+            env:
+              TOKEN: $(AUTH_TOKEN)
+          - publish: target/site/serenity
+            artifact: 'Serenity HTML report'
+            displayName: 'Publish Serenity HTML report'
+            condition: succeededOrFailed()
+          - publish: target/test.log
+            artifact: 'Test logs'
+            displayName: 'Publish test logs'
+            condition: succeededOrFailed()
