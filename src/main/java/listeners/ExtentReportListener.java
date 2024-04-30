@@ -50,9 +50,6 @@ public class ExtentReportListener implements ITestListener {
         extentReports.setSystemInfo("Build#", "1.1");
         extentReports.setSystemInfo("Team", "OMS");
         extentReports.setSystemInfo("Customer Name", "NAL");
-
-        //extentReports.setSystemInfo("ENV NAME", System.getProperty("env"));
-
         return extentReports;
     }
 
@@ -80,12 +77,7 @@ public class ExtentReportListener implements ITestListener {
         System.out.println(methodName + " started!");
         ExtentTest extentTest = extent.createTest(result.getMethod().getMethodName(),
                 result.getMethod().getDescription());
-
         extentTest.assignCategory(result.getTestContext().getSuite().getName());
-        /*
-         * methodName = StringUtils.capitalize(StringUtils.join(StringUtils.
-         * splitByCharacterTypeCamelCase(methodName), StringUtils.SPACE));
-         */
         extentTest.assignCategory(className);
         test.set(extentTest);
         test.get().getModel().setStartTime(getTime(result.getStartMillis()));

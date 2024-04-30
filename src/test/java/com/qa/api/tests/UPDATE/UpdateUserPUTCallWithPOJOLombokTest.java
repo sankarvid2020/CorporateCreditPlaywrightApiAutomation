@@ -1,4 +1,4 @@
-package com.qa.api.tests.PUT;
+package com.qa.api.tests.UPDATE;
 
 import com.api.data.User;
 import com.api.data.Users;
@@ -70,7 +70,7 @@ public class UpdateUserPUTCallWithPOJOLombokTest {
         String responseText = apiPostResponse.text();
         System.out.println(responseText);
 
-        //convert response text/json to POJO -- desrialization
+        //convert response text/json to POJO -- deserialization
         ObjectMapper objectMapper = new ObjectMapper();
         User actUser = objectMapper.readValue(responseText, User.class);
         System.out.println("actual user from the response---->");

@@ -16,10 +16,6 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 public class DeleteUserAPITest {
-    //1. create a user -- user id -- 201
-    //2. delete user -- user id -- 204
-    //3. get user -- user id -- 404
-
     Playwright playwright;
     APIRequest request;
     APIRequestContext requestContext;
@@ -69,7 +65,7 @@ public class DeleteUserAPITest {
         String responseText = apiPostResponse.text();
         System.out.println(responseText);
 
-        //convert response text/json to POJO -- desrialization
+        //convert response text/json to POJO -- deserialization
         ObjectMapper objectMapper = new ObjectMapper();
         User actUser = objectMapper.readValue(responseText, User.class);
         System.out.println("actual user from the response---->");
@@ -110,6 +106,4 @@ public class DeleteUserAPITest {
         Assert.assertTrue(apiResponse.text().contains("Resource not found"));
 
     }
-
-
 }

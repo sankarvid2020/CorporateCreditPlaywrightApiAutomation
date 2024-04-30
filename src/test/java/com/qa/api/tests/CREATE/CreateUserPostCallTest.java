@@ -1,4 +1,4 @@
-package com.qa.api.tests.POST;
+package com.qa.api.tests.CREATE;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,8 +15,6 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
 
 public class CreateUserPostCallTest {
 

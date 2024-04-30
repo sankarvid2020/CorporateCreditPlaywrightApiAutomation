@@ -1,4 +1,4 @@
-package com.qa.api.tests.GET;
+package com.qa.api.tests.READ;
 
 import com.microsoft.playwright.APIRequest;
 import com.microsoft.playwright.APIRequestContext;

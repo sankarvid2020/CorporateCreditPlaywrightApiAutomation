@@ -1,4 +1,4 @@
-package com.qa.api.tests.POST;
+package com.qa.api.tests.CREATE;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

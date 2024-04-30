@@ -11,47 +11,47 @@
 	</listeners>
 	<test name="Get user details">
 		<classes>
-			<class name="com.qa.api.tests.GET.GETAPICall" />
+			<class name="com.qa.api.tests.READ.GETAPICall" />
 		</classes>
 	</test>
 	<test name="Get response with header">
 		<classes>
-			<class name="com.qa.api.tests.GET.APIResponseHeadersTest" />
+			<class name="com.qa.api.tests.READ.APIResponseHeadersTest" />
 		</classes>
 	</test>
 	<test name="Dispose get response">
 		<classes>
-			<class name="com.qa.api.tests.GET.APIDisposeTest" />
+			<class name="com.qa.api.tests.READ.APIDisposeTest" />
 		</classes>
 	</test>
 	<test name="Create user using POST API">
 		<classes>
-			<class name="com.qa.api.tests.POST.CreateUserPostCallTest" />
+			<class name="com.qa.api.tests.CREATE.CreateUserPostCallTest" />
 		</classes>
 	</test>
 	<test name="Create user with Json string using POST API">
 		<classes>
-			<class name="com.qa.api.tests.POST.CreateUserTestWithJsonStringTest" />
+			<class name="com.qa.api.tests.CREATE.CreateUserTestWithJsonStringTest" />
 		</classes>
 	</test>
 	<test name="Create user with Json file using POST API">
 		<classes>
-			<class name="com.qa.api.tests.POST.CreateUserWithJsonFileTest" />
+			<class name="com.qa.api.tests.CREATE.CreateUserWithJsonFileTest" />
 		</classes>
 	</test>
 	<test name="Create user with POJO test using POST API">
 		<classes>
-			<class name="com.qa.api.tests.POST.CreateUserPostCallWithPOJOTest" />
+			<class name="com.qa.api.tests.CREATE.CreateUserPostCallWithPOJOTest" />
 		</classes>
 	</test>
 	<test name="Create user with POJO Lombok using POST API">
 		<classes>
-			<class name="com.qa.api.tests.POST.CreateUserPotCallWithPojoLombokTest" />
+			<class name="com.qa.api.tests.CREATE.CreateUserPotCallWithPojoLombokTest" />
 		</classes>
 	</test>
 	<test name="Update user details with POJO lombok">
 		<classes>
-			<class name="com.qa.api.tests.PUT.UpdateUserPUTCallWithPOJOLombokTest" />
+			<class name="com.qa.api.tests.UPDATE.UpdateUserPUTCallWithPOJOLombokTest" />
 		</classes>
 	</test>
 	<test name="Delete user API test">
